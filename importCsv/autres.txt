@@ -1,0 +1,116 @@
+lire le fichier csv, et rechercher si les valeurs existent déjà dans la BD ; 
+
+si elles n'existent pas, alors les ajouter et créer une liste sms_listes_id
+et une liste sms_recipient_id issues respectivement de sms_listes et sms_recipients;
+
+ajouter ces deux listes dans la table sms_recipients_lists;
+
+si elles existent déjà, passer à la ligne suivante du csv ;
+
+
+
+dans le foreach : 
+
+pour sms_recipients : 
+
+client_id est définit de base à 89.
+
+récupérer le numéro de tél du csv et si il est déjà dans la BD, récupérer son id
+				     s'il n'est pas dans la BD, l'insérer puis récup l'id
+insérer avec le name correspondant
+
+formater le numéro donc si 336.88.88.88.88 rajouter le +
+			si 6.88.88.88.88 rajouter +33
+			si 7.88.88.88.88 rajouter +33
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+_________________________________________________________________________________
+
+
+
+
+
+
+
+<?php
+ 
+	echo "<br>Chemin du fichier : upload/".$_FILES['csv']['name']."<br><br>Resultat Import SQL : <br>";
+
+ 
+	//Le chemin d'acces a ton fichier sur le serveur
+	$fichier = fopen("upload/".$_FILES['csv']['name'], "r");
+ 
+	//tant qu'on est pas a la fin du fichier :
+	while (!feof($fichier))
+	{
+	// On recupere toute la ligne
+	$uneLigne = addslashes(fgets($fichier));
+	//On met dans un tableau les differentes valeurs trouvés (ici séparées par un ';')
+	$tableauValeurs = explode(';', $uneLigne);
+	// On crée la requete pour inserer les donner (ici il y a 12 champs donc de [0] a [11])
+	$sql="INSERT IGNORE INTO histo VALUES ('".$tableauValeurs[0]."', '".$tableauValeurs[1]."', '".$tableauValeurs[2]."', '".$tableauValeurs[3]."', '".$tableauValeurs[4]."', '".$tableauValeurs[5]."', '".$tableauValeurs[6]."', '".$tableauValeurs[7]."')";
+ 
+	$req=mysql_query($sql)or die (mysql_error());
+	// la ligne est finie donc on passe a la ligne suivante (boucle)
+	}
+	//vérification et envoi d'une réponse à l'utilisateur
+	?>
+	
+	
+	
+	
+	<?php /* if ($req)
+	{
+	echo "<h2>Ajout dans la base de données effectué avec succès</h2>";
+	}
+	else
+	{
+	echo "Echec dans l'ajout dans la base de données";
+	}
+	*/ ?>
+
+
+<?php
+
+while (($colonne = fgetcsv($fp, 10000, ",")) !== FALSE) {
+}
+"INSERT INTO sms_listes(id, name, client_id, sms_listes_source_id) VALUES ('$c0','$c1','$c2','$c3')"
+/*
+?>
+
+

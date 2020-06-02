@@ -1,0 +1,16 @@
+<?php
+
+// definie tes variables pour le formulaires
+
+
+// traite si c'est post form
+// génération du ou des mot s de passe
+
+
+// Présenter ton html
+
+affihcage formuleire
+
+affichage des mots de passe
+
+
